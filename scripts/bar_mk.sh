@@ -42,9 +42,9 @@ groups() {
     cur=`xprop -root _NET_CURRENT_DESKTOP | awk '{print $3}'`
     tot=`xprop -root _NET_NUMBER_OF_DESKTOPS | awk '{print $3}'`
 
-    for w in `seq 0 $((cur - 1))`; do line="${line} x "; done
-    line="${line} %{U-}Z"
-    for w in `seq $((cur + 2)) $tot`; do line="${line} x "; done
+    for w in `seq 0 $((cur - 1))`; do line="${line} • "; done
+    line="${line} %{U-}Ω"
+    for w in `seq $((cur + 2)) $tot`; do line="${line} • "; done
     echo $line
 }
 
