@@ -42,9 +42,9 @@ groups() {
     cur=`xprop -root _NET_CURRENT_DESKTOP | awk '{print $3}'`
     tot=`xprop -root _NET_NUMBER_OF_DESKTOPS | awk '{print $3}'`
 
-    for w in `seq 0 $((cur - 1))`; do line="${line} • "; done
-    line="${line} %{U-}Ω"
-    for w in `seq $((cur + 2)) $tot`; do line="${line} • "; done
+    for w in `seq 0 $((cur - 1))`; do line="${line} x "; done
+    line="${line} %{U-}Z"
+    for w in `seq $((cur + 2)) $tot`; do line="${line} x "; done
     echo $line
 }
 
@@ -55,16 +55,25 @@ nowplaying() {
     test -n "$cur" && $PARSER <<< $cur || echo " - stopped - "
 }
 
+battery() {
+BATC=/sys/class/power_supply/BAT0/capacity
+BATS=/sys/class/power_supply/BAT0/status
+# prepend percentage with a '+' if charging, '-' otherwise
+test "`cat $BATS`" = "Charging" && echo -n '+' || echo -n '-'
+# print out the content
+sed -n p $BATC
+}
+
 # This loop will fill a buffer with our infos, and output it to stdout.
 while :; do
     buf=""
-    buf="%{c} %{A:reboot:} reboot %{A}| $(groups) | %{A:shutdown now:} shutdown %{A}"
+    buf="%{c} $(groups) "
     buf="${buf}%{l} $(clock) | "
     buf="${buf} network: $(network) | "
    # buf="${buf} CPU: $(cpuload)%% -"
    # buf="${buf} RAM: $(memused)%% -"
     buf="${buf} %{r}vol: $(volume)%% | "
-    buf="${buf} mpd: $(nowplaying) | "
+    buf="${buf} bat: $(battery)  |"
 
     echo $buf
     # use `nowplaying scroll` to get a scrolling output!
