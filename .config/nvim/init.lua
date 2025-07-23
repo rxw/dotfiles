@@ -8,6 +8,15 @@ local opts = { noremap = true, silent = true }
 
 -- Save with <leader>w
 keymap("n", "<leader>w", ":w<CR>", opts)
+-- Smart window closing
+vim.keymap.set("n", "<leader>q", function()
+	-- Check how many windows are open
+	if #vim.api.nvim_list_wins() > 1 then
+		vim.cmd("close") -- just close this window
+	else
+		vim.cmd("quit") -- quit Neovim if this is the last one
+	end
+end, { desc = "Close window or quit", noremap = true, silent = true })
 
 -- Use H and L to move between buffers (you can swap to tabs if you prefer)
 keymap("n", "H", ":bprev<CR>", opts)

@@ -232,14 +232,6 @@ return {
 		end,
 	},
 	{
-		"echasnovski/mini.bufremove",
-		version = "*",
-		config = function()
-			local bufremove = require("mini.bufremove")
-			vim.keymap.set("n", "<leader>q", bufremove.delete, { desc = "Smart Buffer Close" })
-		end,
-	},
-	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
 		config = function()
