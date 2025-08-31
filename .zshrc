@@ -89,6 +89,16 @@ alias mv='mv -i'
 alias rm='rm -i'
 alias vim='nvim'
 
+# git aliases
+alias gs='git status'
+alias gc='git checkout'
+alias gcb='git checkout -b'
+alias gf='git fetch origin'
+gca() {
+  git commit -am $1 && git push
+}
+
+
 # Add local bin directory to PATH if it exists
 if [ -d "$HOME/bin" ] ; then
   PATH="$HOME/bin:$PATH"
