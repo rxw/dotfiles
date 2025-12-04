@@ -143,6 +143,7 @@ if [ -f ~/.zshrc.local ]; then
 fi
 
 export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
+export PATH="/Users/tato/.bun/bin:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"  # This loads nvm
